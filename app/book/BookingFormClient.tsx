@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 interface BookingForm {
   fullName: string;
@@ -48,6 +48,8 @@ export default function BookingFormClient() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const minDate = useMemo(() => new Date().toISOString().split('T')[0], []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -188,7 +190,7 @@ export default function BookingFormClient() {
             required
             value={form.preferredDate}
             onChange={handleChange}
-            min={new Date().toISOString().split('T')[0]}
+            min={minDate}
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>

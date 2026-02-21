@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'sports rehab Noida',
     'orthopedic physiotherapy Noida',
     'neuro physiotherapy Noida',
-    'home visit physiotherapy Noida',
+    'Home Visit physiotherapy Noida',
     'PhysioWithUs',
   ],
   openGraph: {
