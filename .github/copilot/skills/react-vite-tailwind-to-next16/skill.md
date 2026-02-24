@@ -1,0 +1,79 @@
+# React + Vite + Tailwind to Next.js 16 Migration Skill
+
+## Overview
+This skill guides the migration of a React application built with Vite and Tailwind CSS to Next.js 16 with App Router, maintaining existing component structure and styling.
+
+## Key Migration Steps
+
+### 1. Project Setup
+- Initialize Next.js 16 project with TypeScript support
+- Configure Tailwind CSS for Next.js
+- Set up path aliases in `tsconfig.json` and `next.config.js`
+
+### 2. File Structure Transformation
+- Convert `src/pages/` components to `app/` directory structure
+- Rename `Index.tsx` to `page.tsx` and move to route directories
+- Create `layout.tsx` for root layout replacing traditional root component
+
+### 3. Component Migration
+- Update component imports to use Next.js conventions
+- Replace React Router with Next.js Link and routing
+- Update client-side state management if needed
+- Add 'use client' directive for interactive components
+
+### 4. Styling Migration
+- Preserve Tailwind CSS configuration
+- Update global styles import in new layout structure
+- Ensure CSS modules work with Next.js if used
+
+### 5. Build Configuration
+- Migrate from Vite config to `next.config.js`
+- Update environment variables handling
+- Configure build optimization settings
+
+### 6. Testing & Validation
+- Update test configuration for Next.js
+- Verify all routes work with new app router
+- Test component rendering and styling
+
+## Common Patterns
+
+### Route Migration
+```
+src/pages/Index.tsx → app/page.tsx
+src/pages/NotFound.tsx → app/not-found.tsx
+src/pages/[id].tsx → app/[id]/page.tsx
+```
+
+### Layout Structure
+```
+app/
+  layout.tsx (root layout)
+  page.tsx (home page)
+  components/ (reusable components)
+```
+
+### Component Updates
+- Add 'use client' at top of interactive components
+- Replace `useHistory`/`useNavigate` with Next.js `useRouter`
+- Use `Link` component from 'next/link'
+
+## Dependencies to Update
+- `next` (v16+)
+- Remove Vite dependencies
+- Keep: React, Tailwind CSS, TypeScript
+- Add Next.js specific dependencies as needed
+
+## Performance Considerations
+- Leverage Next.js Image optimization
+- Implement dynamic imports for code splitting
+- Utilize App Router streaming capabilities
+- Configure ISR/SSR as appropriate
+
+## Verification Checklist
+- [ ] All routes accessible
+- [ ] Styling intact and responsive
+- [ ] Components render correctly
+- [ ] No console errors
+- [ ] Build succeeds without warnings
+- [ ] Type checking passes
