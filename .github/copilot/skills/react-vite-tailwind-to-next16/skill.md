@@ -36,6 +36,75 @@ This skill guides the migration of a React application built with Vite and Tailw
 - Verify all routes work with new app router
 - Test component rendering and styling
 
+### 7. Test Case Migration (Vite to Jest)
+#### Setup Jest Configuration
+- Install Jest and testing dependencies: `npm install --save-dev jest @testing-library/react @testing-library/jest-dom ts-jest @types/jest`
+- Create `jest.config.js` in project root
+- Update `package.json` with test scripts: `"test": "jest"`
+
+#### Jest Configuration Template
+```javascript
+// jest.config.js
+const nextJest = require('next/jest')
+
+const createJestConfig = nextJest({
+  dir: './',
+})
+
+const customJestConfig = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  testEnvironment: 'jest-environment-jsdom',
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+}
+
+module.exports = createJestConfig(customJestConfig)
+```
+
+#### Test File Structure
+```
+src/
+  components/
+    __tests__/
+      ComponentName.test.tsx
+  pages/
+    __tests__/
+      page.test.tsx
+```
+
+#### Test File Migration Example
+```typescript
+// Before (Vite + Vitest)
+import { render, screen } from '@testing-library/react'
+import { test, expect } from 'vitest'
+import Component from '@/components/Component'
+
+test('Component renders', () => {
+  render(<Component />)
+  expect(screen.getByRole('heading')).toBeInTheDocument()
+})
+
+// After (Jest)
+import { render, screen } from '@testing-library/react'
+import Component from '@/components/Component'
+
+describe('Component', () => {
+  it('renders correctly', () => {
+    render(<Component />)
+    expect(screen.getByRole('heading')).toBeInTheDocument()
+  })
+})
+```
+
+#### Key Changes
+- Replace `test()` with `it()` or `describe()/it()` blocks
+- Import test utilities from `@testing-library/react`
+- Update module path aliases to match Jest configuration
+- Ensure all mocks work with Jest's mock system
+- Add `jest.setup.js` for global test configuration
+
 ## Common Patterns
 
 ### Route Migration
