@@ -38,7 +38,7 @@ This skill guides the migration of a React application built with Vite and Tailw
 
 ### 7. Test Case Migration (Vite to Jest)
 #### Setup Jest Configuration
-- Install Jest and testing dependencies: `npm install --save-dev jest @testing-library/react @testing-library/jest-dom ts-jest @types/jest`
+- Install Jest and testing dependencies: `npm install --save-dev jest @testing-library/react @testing-library/jest-dom @types/jest`
 - Create `jest.config.js` in project root
 - Update `package.json` with test scripts: `"test": "jest"`
 
@@ -69,7 +69,7 @@ src/
   components/
     __tests__/
       ComponentName.test.tsx
-  pages/
+  app/
     __tests__/
       page.test.tsx
 ```
@@ -87,6 +87,8 @@ test('Component renders', () => {
 })
 
 // After (Jest)
+// Note: toBeInTheDocument() and other custom matchers are available globally
+// because jest.setup.js imports '@testing-library/jest-dom' (see setup below)
 import { render, screen } from '@testing-library/react'
 import Component from '@/components/Component'
 
@@ -104,6 +106,13 @@ describe('Component', () => {
 - Update module path aliases to match Jest configuration
 - Ensure all mocks work with Jest's mock system
 - Add `jest.setup.js` for global test configuration
+
+#### jest.setup.js
+Create this file in your project root to make `@testing-library/jest-dom` matchers (e.g. `toBeInTheDocument()`) available in all tests:
+```javascript
+// jest.setup.js
+import '@testing-library/jest-dom'
+```
 
 ## Common Patterns
 
