@@ -42,9 +42,13 @@ Do NOT modify code yet.
 
 ## Step 2 — Initialize Next.js 16+
 
-Create new project using:
+Scaffold the Next.js project directly in this repository (in-place migration).
 
-npx create-next-app@latest app-name --typescript --tailwind --eslint --app
+Run the following from the repository root:
+
+npx create-next-app@latest . --typescript --tailwind --eslint --app
+
+If the scaffolder refuses to target an existing directory, scaffold into a temporary directory (`/tmp/next-scaffold`), then manually copy the generated files (e.g. `app/`, `next.config.*`, `tsconfig.json`, updated `package.json` scripts) into the repository root — taking care not to overwrite existing source files that will be migrated in later steps.
 
 Requirements:
 
@@ -261,7 +265,7 @@ app/
   globals.css
 
 public/
-next.config.js
+next.config.mjs (or next.config.js, matching package.json "type")
 package.json
 tsconfig.json
 tailwind.config.ts
