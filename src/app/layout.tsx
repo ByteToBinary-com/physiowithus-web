@@ -1,0 +1,22 @@
+import type { Metadata } from "next";
+import { Providers } from "./providers";
+import "@/index.css";
+
+export const metadata: Metadata = {
+  title: "PhysioWithUs - Professional Physiotherapy Services",
+  description: "Expert physiotherapy and rehabilitation services",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
