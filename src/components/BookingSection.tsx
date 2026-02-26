@@ -32,6 +32,8 @@ const conditions = [
   "Other",
 ];
 
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
 const BookingSection = () => {
   const { toast } = useToast();
   const [name, setName] = useState("");
@@ -43,6 +45,18 @@ const BookingSection = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name || !phone || !condition) return;
+
+    const accessKey = WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      console.error("NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY is not set.");
+      toast({
+        title: "Configuration Error",
+        description: "Booking is currently unavailable. Please contact us directly.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -50,7 +64,7 @@ const BookingSection = () => {
       formData.append("name", name);
       formData.append("phone", phone);
       formData.append("condition", condition);
-      formData.append("access_key", "8d4d1eb1-469c-4004-8870-cf36689b02f2");
+      formData.append("access_key", accessKey);
       if (date) formData.append("date", format(date, "PPP"));
 
       const response = await fetch("https://api.web3forms.com/submit", {
