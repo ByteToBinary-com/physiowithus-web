@@ -50,9 +50,10 @@ const BookingSection = () => {
       formData.append("name", name);
       formData.append("phone", phone);
       formData.append("condition", condition);
+      formData.append("access_key", "8d4d1eb1-469c-4004-8870-cf36689b02f2");
       if (date) formData.append("date", format(date, "PPP"));
 
-      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData,
       });
