@@ -50,7 +50,7 @@ const BookingSection = () => {
     const checkRateLimit = () => {
       const lastSubmit = localStorage.getItem(RATE_LIMIT_KEY);
       if (lastSubmit) {
-        const timePassed = Date.now() - parseInt(lastSubmit);
+        const timePassed = Date.now() - parseInt(lastSubmit, 10);
         const remaining = Math.max(0, RATE_LIMIT_COOLDOWN - timePassed);
         setRemainingTime(remaining);
       }
@@ -67,12 +67,12 @@ const BookingSection = () => {
     // Rate limit check
     const lastSubmit = localStorage.getItem(RATE_LIMIT_KEY);
     if (lastSubmit) {
-      const timePassed = Date.now() - parseInt(lastSubmit);
+      const timePassed = Date.now() - parseInt(lastSubmit, 10);
       if (timePassed < RATE_LIMIT_COOLDOWN) {
         const minutesRemaining = Math.ceil((RATE_LIMIT_COOLDOWN - timePassed) / 60000);
         toast({
           title: "Please wait",
-          description: `You can submit another booking in ${minutesRemaining} minute${minutesRemaining !== 1 ? 's' : ''}. We've received your appointment request.`,
+          description: `Please wait before submitting another booking request. You can submit again in ${minutesRemaining} minute${minutesRemaining !== 1 ? 's' : ''}.`,
           variant: "destructive",
         });
         return;
@@ -85,6 +85,37 @@ const BookingSection = () => {
     }
     
     if (!name || !phone || !condition) return;
+
+    // Validate name (letters and spaces only)
+    if (!/^[a-zA-Z\s]{2,}$/.test(name.trim())) {
+      toast({
+        title: "Invalid Name",
+        description: "Please enter a valid name (letters only).",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate phone number format
+    if (!/^\+?[\d\s\-().]{7,15}$/.test(phone.trim())) {
+      toast({
+        title: "Invalid Phone Number",
+        description: "Please enter a valid phone number.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      toast({
+        title: "Configuration Error",
+        description: "Booking form is not configured. Please contact us directly.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -92,7 +123,7 @@ const BookingSection = () => {
       formData.append("name", name);
       formData.append("phone", phone);
       formData.append("condition", condition);
-      formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "");
+      formData.append("access_key", accessKey);
       if (date) formData.append("date", format(date, "PPP"));
 
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -113,6 +144,7 @@ const BookingSection = () => {
         setPhone("");
         setCondition("");
         setDate(undefined);
+        setHoneypot("");
       } else {
         toast({
           title: "Error",
@@ -148,7 +180,7 @@ const BookingSection = () => {
               name="website"
               value={honeypot}
               onChange={(e) => setHoneypot(e.target.value)}
-              style={{ display: "none" }}
+              className="hidden"
               tabIndex={-1}
               autoComplete="off"
               aria-hidden="true"
