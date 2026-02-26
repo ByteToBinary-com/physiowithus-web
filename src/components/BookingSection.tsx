@@ -40,21 +40,48 @@ const BookingSection = () => {
   const [date, setDate] = useState<Date>();
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name || !phone || !condition) return;
     setSubmitting(true);
-    setTimeout(() => {
-      toast({
-        title: "Appointment Requested!",
-        description: "We'll contact you within 1 hour to confirm your booking.",
+
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("phone", phone);
+      formData.append("condition", condition);
+      if (date) formData.append("date", format(date, "PPP"));
+
+      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        body: formData,
       });
-      setName("");
-      setPhone("");
-      setCondition("");
-      setDate(undefined);
+
+      if (response.ok) {
+        toast({
+          title: "Appointment Requested!",
+          description: "We'll contact you within 1 hour to confirm your booking.",
+        });
+        setName("");
+        setPhone("");
+        setCondition("");
+        setDate(undefined);
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to submit. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setSubmitting(false);
-    }, 600);
+    }
   };
 
   return (
