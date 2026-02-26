@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,6 +32,9 @@ const conditions = [
   "Other",
 ];
 
+const RATE_LIMIT_COOLDOWN = 5 * 60 * 1000; // 5 minutes in milliseconds
+const RATE_LIMIT_KEY = "booking_form_last_submit";
+
 const BookingSection = () => {
   const { toast } = useToast();
   const [name, setName] = useState("");
@@ -39,9 +42,48 @@ const BookingSection = () => {
   const [condition, setCondition] = useState("");
   const [date, setDate] = useState<Date>();
   const [submitting, setSubmitting] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
+  const [remainingTime, setRemainingTime] = useState(0);
+
+  // Check rate limit on mount and update countdown
+  useEffect(() => {
+    const checkRateLimit = () => {
+      const lastSubmit = localStorage.getItem(RATE_LIMIT_KEY);
+      if (lastSubmit) {
+        const timePassed = Date.now() - parseInt(lastSubmit);
+        const remaining = Math.max(0, RATE_LIMIT_COOLDOWN - timePassed);
+        setRemainingTime(remaining);
+      }
+    };
+
+    checkRateLimit();
+    const interval = setInterval(checkRateLimit, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Rate limit check
+    const lastSubmit = localStorage.getItem(RATE_LIMIT_KEY);
+    if (lastSubmit) {
+      const timePassed = Date.now() - parseInt(lastSubmit);
+      if (timePassed < RATE_LIMIT_COOLDOWN) {
+        const minutesRemaining = Math.ceil((RATE_LIMIT_COOLDOWN - timePassed) / 60000);
+        toast({
+          title: "Please wait",
+          description: `You can submit another booking in ${minutesRemaining} minute${minutesRemaining !== 1 ? 's' : ''}. We've received your appointment request.`,
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+    
+    // Honeypot validation - if filled, silently fail
+    if (honeypot) {
+      return;
+    }
+    
     if (!name || !phone || !condition) return;
     setSubmitting(true);
 
@@ -50,7 +92,7 @@ const BookingSection = () => {
       formData.append("name", name);
       formData.append("phone", phone);
       formData.append("condition", condition);
-      formData.append("access_key", "8d4d1eb1-469c-4004-8870-cf36689b02f2");
+      formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "");
       if (date) formData.append("date", format(date, "PPP"));
 
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -59,6 +101,10 @@ const BookingSection = () => {
       });
 
       if (response.ok) {
+        // Save submission time for rate limiting
+        localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
+        setRemainingTime(RATE_LIMIT_COOLDOWN);
+        
         toast({
           title: "Appointment Requested!",
           description: "We'll contact you within 1 hour to confirm your booking.",
@@ -96,6 +142,17 @@ const BookingSection = () => {
             </p>
           </div>
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+            {/* Honeypot field - hidden from users */}
+            <input
+              type="text"
+              name="website"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              style={{ display: "none" }}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
               <Input id="name" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -141,8 +198,13 @@ const BookingSection = () => {
                 </PopoverContent>
               </Popover>
             </div>
-            <Button type="submit" className="w-full" size="lg" disabled={submitting}>
-              {submitting ? "Submitting…" : "Schedule Consultation"}
+            <Button 
+              type="submit" 
+              className="w-full" 
+              size="lg" 
+              disabled={submitting || remainingTime > 0}
+            >
+              {submitting ? "Submitting…" : remainingTime > 0 ? `Please wait ${Math.ceil(remainingTime / 1000)}s` : "Schedule Consultation"}
             </Button>
             <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
               <Clock className="h-3.5 w-3.5" /> We respond within 1 hour
