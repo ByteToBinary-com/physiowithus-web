@@ -1,30 +1,36 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Star, Plus } from "lucide-react";
 import AddTestimonyDialog from "./AddTestimonyDialog";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const initialTestimonials = [
   {
+    id: 1,
     name: "Rajesh Mehta",
     condition: "Chronic Back Pain",
     quote: "After just 8 sessions, my back pain reduced by 80%. The team truly understands pain management.",
     rating: 5,
   },
   {
+    id: 2,
     name: "Priya Nair",
     condition: "Post-Knee Surgery",
     quote: "They guided me through every step of my recovery. I'm walking normally again within 3 months!",
     rating: 5,
   },
   {
+    id: 3,
     name: "Amit Desai",
     condition: "Sports Injury",
     quote: "As a runner, I needed fast and effective rehab. PhysioWithUs got me back on the track in record time.",
     rating: 5,
   },
   {
+    id: 4,
     name: "Sunita Rao",
     condition: "Neck & Shoulder Stiffness",
     quote: "The personalized treatment plan made all the difference. I feel 10 years younger!",
@@ -35,16 +41,18 @@ const initialTestimonials = [
 const TestimonialsSection = () => {
     const [testimonials, setTestimonials] = useState(initialTestimonials);
     const [open, setOpen] = useState(false);
+    const nextId = useRef(initialTestimonials.length + 1);
 
     const handleAddTestimony = (testimony: { name: string; testimony: string; rating: number }) => {
-        setTestimonials([
+        setTestimonials((prevTestimonials) => [
           {
+            id: nextId.current++,
             name: testimony.name,
             condition: "New Testimony",
             quote: testimony.testimony,
             rating: testimony.rating,
           },
-          ...testimonials,
+          ...prevTestimonials,
         ]);
         setOpen(false);
       };
@@ -61,7 +69,7 @@ const TestimonialsSection = () => {
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {testimonials.map((t) => (
-              <Card key={t.name} className="border-border/60">
+              <Card key={t.id} className="border-border/60">
                 <CardContent className="p-6">
                   <div className="flex gap-0.5">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -83,7 +91,10 @@ const TestimonialsSection = () => {
         </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button size="icon" className="absolute bottom-8 right-8 h-16 w-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center">
+            <Button
+              size="icon"
+              aria-label="Add testimony"
+              className="absolute bottom-8 right-8 h-16 w-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center">
               <Plus className="h-10 w-10" />
             </Button>
           </DialogTrigger>

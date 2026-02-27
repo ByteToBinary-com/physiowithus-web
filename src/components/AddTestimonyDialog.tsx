@@ -1,7 +1,8 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import {
     DialogHeader,
     DialogTitle,
@@ -33,9 +34,14 @@ const formSchema = z.object({
     email: z.string().email({
         message: "Please enter a valid email address.",
     }),
-    testimony: z.string().max(200, {
+    testimony: z
+      .string()
+      .min(1, {
+        message: "Testimony must not be empty.",
+      })
+      .max(200, {
         message: "Testimony must not be longer than 200 characters.",
-    }),
+      }),
     rating: z.number().min(1).max(5),
   });
 
@@ -53,39 +59,47 @@ const AddTestimonyDialog = ({ onAddTestimony }: { onAddTestimony: (data: z.infer
       });
     const { toast } = useToast();
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        const accessKey = process.env.NEXT_PUBLIC_TESTIMONY_ACCESS_KEY;
+        if (!accessKey) {
+          toast({
+            title: "Configuration Error",
+            description: "Feedback form is not configured. Please contact us directly.",
+            variant: "destructive",
+          });
+          return;
+        }
+
         const formData = new FormData();
-    
+        formData.append("access_key", accessKey);
         Object.entries(values).forEach(([key, value]) => {
           formData.append(key, value.toString());
         });
 
-        const accessKey = process.env.NEXT_PUBLIC_TESTIMONY_ACCESS_KEY;
-    if (!accessKey) {
-      toast({
-        title: "Configuration Error",
-        description: "Feedback form is not configured. Please contact us directly.",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: formData,
-        }).then((res) => res.json());
-    
-        if (res.success) {
-        toast({
-          title: "Success",
-          description: "Testimony submitted successfully!"
-        });
-          onAddTestimony(values);
-        } else {
-        toast({
-          title: "Error",
-          description: "Failed to submit. Please try again.",
-          variant: "destructive",
-        });
+        try {
+          const res = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData,
+          }).then((res) => res.json());
+
+          if (res.success) {
+            toast({
+              title: "Success",
+              description: "Testimony submitted successfully!",
+            });
+            onAddTestimony(values);
+          } else {
+            toast({
+              title: "Error",
+              description: "Failed to submit. Please try again.",
+              variant: "destructive",
+            });
+          }
+        } catch {
+          toast({
+            title: "Error",
+            description: "An unexpected error occurred. Please try again.",
+            variant: "destructive",
+          });
         }
       }
 
