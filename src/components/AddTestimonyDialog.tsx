@@ -160,23 +160,54 @@ const AddTestimonyDialog = ({ onAddTestimony }: { onAddTestimony: (data: z.infer
                     name="rating"
                     render={({ field }) => (
                         <FormItem>
-                        <FormLabel>Rating</FormLabel>
+                        <FormLabel id="rating-label">Rating</FormLabel>
                         <FormControl>
-                            <div className="flex items-center gap-2">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                                <Star
-                                key={star}
-                                className={`cursor-pointer ${
-                                    star <= (field.value || rating)
-                                    ? "text-yellow-500 fill-yellow-500"
-                                    : "text-gray-400"
-                                }`}
-                                onClick={() => {
+                            <div
+                            className="flex items-center gap-2"
+                            role="radiogroup"
+                            aria-labelledby="rating-label"
+                            >
+                            {[1, 2, 3, 4, 5].map((star) => {
+                                const currentValue = field.value || rating;
+                                const isSelected = star === currentValue;
+                                return (
+                                <button
+                                    key={star}
+                                    type="button"
+                                    role="radio"
+                                    aria-checked={isSelected}
+                                    aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
+                                    tabIndex={isSelected ? 0 : -1}
+                                    className="cursor-pointer p-1"
+                                    onClick={() => {
                                     setRating(star);
                                     field.onChange(star);
-                                }}
-                                />
-                            ))}
+                                    }}
+                                    onKeyDown={(event) => {
+                                    if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+                                        event.preventDefault();
+                                        const next = Math.min((currentValue || 1) + 1, 5);
+                                        setRating(next);
+                                        field.onChange(next);
+                                    } else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+                                        event.preventDefault();
+                                        const prev = Math.max((currentValue || 1) - 1, 1);
+                                        setRating(prev);
+                                        field.onChange(prev);
+                                    }
+                                    }}
+                                >
+                                    <Star
+                                    className={`${
+                                        star <= currentValue
+                                        ? "text-yellow-500 fill-yellow-500"
+                                        : "text-gray-400"
+                                    }`}
+                                    aria-hidden="true"
+                                    />
+                                </button>
+                                );
+                            })}
                             </div>
                         </FormControl>
                         <FormMessage />
