@@ -123,6 +123,8 @@ const BookingSection = () => {
       formData.append("name", name);
       formData.append("phone", phone);
       formData.append("condition", condition);
+      formData.append("subject", "Request From New Patient");
+      formData.append("form_name", "New Patient");
       formData.append("access_key", accessKey);
       if (date) formData.append("date", format(date, "PPP"));
 
