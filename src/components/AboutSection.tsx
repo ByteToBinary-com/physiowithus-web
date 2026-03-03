@@ -12,18 +12,18 @@ const AboutSection = () => {
               philosophy.
             </p>
             <p className="mt-4 leading-relaxed text-muted-foreground">
-              Our founder, <span className="font-semibold text-foreground">Dr. Ananya Sharma</span>,
-              brings over 15 years of clinical experience in musculoskeletal and sports
-              rehabilitation. She leads a team of certified therapists dedicated to helping you move
+              Our founder, <span className="font-semibold text-foreground">Dr. Amit Shakya</span>,
+              brings over 5+ years of clinical experience in musculoskeletal and sports
+              rehabilitation. He leads a team of certified therapists dedicated to helping you move
               better and live pain-free.
             </p>
             <div className="mt-8 flex gap-8">
               <div>
-                <p className="text-3xl font-bold text-primary">10+</p>
+                <p className="text-3xl font-bold text-primary">5+</p>
                 <p className="text-sm text-muted-foreground">Years Experience</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-primary">500+</p>
+                <p className="text-3xl font-bold text-primary">250+</p>
                 <p className="text-sm text-muted-foreground">Happy Patients</p>
               </div>
               <div>
@@ -39,7 +39,7 @@ const AboutSection = () => {
                   <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary/20">
                     <span className="text-3xl font-bold text-primary">AS</span>
                   </div>
-                  <p className="font-semibold text-foreground">Dr. Ananya Sharma</p>
+                  <p className="font-semibold text-foreground">Dr. Amit Shakya</p>
                   <p className="mt-1 text-sm text-muted-foreground">Founder & Lead Physiotherapist</p>
                 </div>
               </div>
