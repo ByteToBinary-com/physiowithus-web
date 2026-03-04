@@ -25,7 +25,7 @@ const FloatingElements = () => {
         <div className="fixed inset-x-0 bottom-0 z-40 flex border-t border-border bg-background/95 backdrop-blur">
           <a
             href="tel:+1234567890"
-            className="flex flex-1 flex-col items-center gap-0.5 py-3 text-xs font-medium text-foreground transition-colors hover:text-primary"
+            className="flex flex-1 flex-col items-center gap-0.5 py-3 text-xs font-medium text-blue-500 transition-colors hover:text-primary"
           >
             <Phone className="h-5 w-5" />
             Call
@@ -41,7 +41,7 @@ const FloatingElements = () => {
             href="https://wa.me/1234567890"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-1 flex-col items-center gap-0.5 py-3 text-xs font-medium text-foreground transition-colors hover:text-primary"
+            className="flex flex-1 flex-col items-center gap-0.5 py-3 text-xs font-medium text-green-500 transition-colors hover:text-primary"
           >
             <MessageCircle className="h-5 w-5" />
             WhatsApp

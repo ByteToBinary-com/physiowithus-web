@@ -5,6 +5,9 @@ import "@/index.css";
 export const metadata: Metadata = {
   title: "PhysioWithUs - Professional Physiotherapy Services",
   description: "Expert physiotherapy and rehabilitation services",
+  icons: {
+    icon: "/physiowithus_icon.ico",
+  },
 };
 
 export default function RootLayout({
