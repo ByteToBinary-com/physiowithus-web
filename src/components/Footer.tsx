@@ -60,9 +60,9 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-semibold text-foreground">Contact</h4>
             <ul className="mt-3 space-y-2 text-sm">
-              <li>+91 98765 43210</li>
+              <li>+91 7838 051 671</li>
               <li>info@physiowithus.com</li>
-              <li>123 Wellness Street, Mumbai</li>
+              <li>Sector 116, Noida, Uttar Pradesh 201301</li>
             </ul>
           </div>
         </div>
