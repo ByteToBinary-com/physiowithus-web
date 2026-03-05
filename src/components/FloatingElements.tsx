@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { MessageCircle, Phone, CalendarDays } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -10,7 +11,7 @@ const FloatingElements = () => {
     <>
       {/* WhatsApp floating button - hidden on mobile where bottom bar shows */}
       <a
-        href="https://wa.me/+917838051671"
+        href="https://wa.me/917838051671"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-lg transition-transform hover:scale-110 md:bottom-8 md:right-8"
@@ -30,15 +31,15 @@ const FloatingElements = () => {
             <Phone className="h-5 w-5" />
             Call
           </a>
-          <a
+          <Link
             href="/booking"
             className="flex flex-1 flex-col items-center gap-0.5 bg-primary py-3 text-xs font-medium text-primary-foreground"
           >
             <CalendarDays className="h-5 w-5" />
             Book
-          </a>
+          </Link>
           <a
-            href="https://wa.me/+917838051671"
+            href="https://wa.me/917838051671"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-1 flex-col items-center gap-0.5 py-3 text-xs font-medium text-green-500 transition-colors hover:text-primary"

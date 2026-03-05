@@ -35,7 +35,7 @@ const ContactSection = () => {
               </div>
             </div>
             <Button variant="outline" className="gap-2" asChild>
-              <a href="https://wa.me/+917838051671" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/917838051671" target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="h-4 w-4" />
                 Chat on WhatsApp
               </a>
