@@ -13,7 +13,7 @@ const ContactSection = () => {
               <div>
                 <p className="font-semibold text-foreground">Clinic Address</p>
                 <p className="text-sm text-muted-foreground">
-                  123 Wellness Street, Health City, Mumbai 400001
+                  Sector 116, Noida, Uttar Pradesh 201301
                 </p>
               </div>
             </div>
@@ -21,8 +21,8 @@ const ContactSection = () => {
               <Phone className="mt-1 h-5 w-5 shrink-0 text-primary" />
               <div>
                 <p className="font-semibold text-foreground">Phone</p>
-                <a href="tel:+1234567890" className="text-sm text-muted-foreground hover:text-primary">
-                  +91 98765 43210
+                <a href="tel:+917838051671" className="text-sm text-muted-foreground hover:text-primary">
+                  +91 7838 051 671
                 </a>
               </div>
             </div>
@@ -35,7 +35,7 @@ const ContactSection = () => {
               </div>
             </div>
             <Button variant="outline" className="gap-2" asChild>
-              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/+917838051671" target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="h-4 w-4" />
                 Chat on WhatsApp
               </a>
