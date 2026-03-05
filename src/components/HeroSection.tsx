@@ -22,7 +22,7 @@ const HeroSection = () => {
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" className="w-full px-8 text-base sm:w-auto" asChild>
-              <a href="#booking">Book Appointment</a>
+              <a href="/booking">Book Appointment</a>
             </Button>
             <Button size="lg" variant="outline" className="w-full px-8 text-base sm:w-auto" asChild>
               <a href="tel:+1234567890">

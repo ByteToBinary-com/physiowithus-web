@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
 import "@/index.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import FloatingElements from "@/components/FloatingElements";
 
 export const metadata: Metadata = {
   title: "PhysioWithUs - Professional Physiotherapy Services",
@@ -18,7 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <div className="min-h-screen bg-background">
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <FloatingElements />
+          </div>
+        </Providers>
       </body>
     </html>
   );
