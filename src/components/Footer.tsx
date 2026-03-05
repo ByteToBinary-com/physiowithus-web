@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 const quickLinks = [
   { label: 'Home', href: '/' },
@@ -19,7 +19,7 @@ const servicesLinks = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-gray-900 text-gray-300 py-12">
+    <footer className="border-t border-border bg-muted text-muted-foreground py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -27,7 +27,7 @@ const Footer = () => {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
                 <span className="text-sm font-bold text-primary-foreground">P</span>
               </div>
-              <span className="text-lg font-bold text-white">
+              <span className="text-lg font-bold text-foreground">
                 Physio<span className="text-primary">WithUs</span>
               </span>
             </div>
@@ -36,7 +36,7 @@ const Footer = () => {
             </p>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-white">Quick Links</h4>
+            <h4 className="text-sm font-semibold text-foreground">Quick Links</h4>
             <ul className="mt-3 space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.label}>
@@ -48,19 +48,17 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-white">Services</h4>
+            <h4 className="text-sm font-semibold text-foreground">Services</h4>
             <ul className="mt-3 space-y-2">
               {servicesLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm hover:text-primary">
-                    {link}
-                  </a>
+                <li key={link} className="text-sm">
+                  {link}
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-white">Contact</h4>
+            <h4 className="text-sm font-semibold text-foreground">Contact</h4>
             <ul className="mt-3 space-y-2 text-sm">
               <li>+91 98765 43210</li>
               <li>info@physiowithus.com</li>
@@ -68,8 +66,8 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="mt-10 border-t border-gray-700 pt-6 text-center text-xs">
-          <p>© {new Date().getFullYear()} PhysioWithUs. All rights reserved. <a href="#" className="hover:text-primary">Privacy Policy</a></p>
+        <div className="mt-10 border-t border-border pt-6 text-center text-xs">
+          <p>© {new Date().getFullYear()} PhysioWithUs. All rights reserved. Privacy Policy</p>
         </div>
       </div>
     </footer>
