@@ -24,8 +24,8 @@ const Header = () => {
           <Image
             src="/physiowithus.png"
             alt="PhysioWithUs Logo"
-            width={36}
-            height={36}
+            width={64}
+            height={64}
             className="rounded-lg"
           />
           <span className="text-xl font-bold text-foreground">
