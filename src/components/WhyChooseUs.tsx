@@ -30,7 +30,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="bg-green-50 py-20 sm:py-24 border-t border-b border-green-200">
+    <section className="bg-muted/50 py-20 sm:py-24 border-t border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-3xl font-bold text-foreground sm:text-4xl">Why Choose Us</h2>
         <div className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">

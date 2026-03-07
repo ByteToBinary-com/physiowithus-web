@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <HeroSection />
       <WhyChooseUs />
-      <ServicesSection />
+      <ServicesSection className="bg-muted/50 border-t border-b border-border" />
     </>
   );
 }

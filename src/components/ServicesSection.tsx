@@ -34,9 +34,13 @@ const services = [
   },
 ];
 
-const ServicesSection = () => {
+interface ServicesSectionProps {
+  className?: string;
+}
+
+const ServicesSection = ({ className = "" }: ServicesSectionProps) => {
   return (
-    <section id="services" className="bg-blue-50 py-20 sm:py-24 border-t border-b border-blue-200">
+    <section id="services" className={`py-20 sm:py-24 ${className}`.trim()}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">Our Services</h2>
