@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import FloatingElements from "@/components/FloatingElements";
 
 export const metadata: Metadata = {
-  title: "PhysioWithUs - Professional Physiotherapy Services",
+  title: "PhysioWithUs - Professional Physiotherapy Services at home @699 - Certified Physiotherapists, Personalized Care, Convenient Booking",
   description: "Expert physiotherapy and rehabilitation services",
   icons: {
     icon: "/physiowithus_icon.ico",
