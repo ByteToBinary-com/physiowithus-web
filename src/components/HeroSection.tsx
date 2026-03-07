@@ -26,7 +26,7 @@ const HeroSection = () => {
               <Link href="/booking">Book Appointment</Link>
             </Button>
             <Button size="lg" variant="outline" className="w-full px-8 text-base sm:w-auto" asChild>
-              <a href="tel:+1234567890">
+              <a href="tel:+917838051671" className="flex items-center gap-2">
                 <Phone className="mr-2 h-4 w-4" />
                 Call Now
               </a>

@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Activity, Bone, Stethoscope, Baby, Home, Hand } from "lucide-react";
+import { Activity, Bone, Stethoscope, Baby, Home, Hand, Brain } from "lucide-react";
 
 const services = [
   {
@@ -31,6 +31,11 @@ const services = [
     icon: Hand,
     title: "Dry Needling & Manual Therapy",
     description: "Advanced hands-on techniques to release tension, reduce pain, and improve mobility.",
+  },
+  {
+    icon: Brain,
+    title: "Neurological",
+    description: "Stroke recovery and movement disorders.",
   },
 ];
 
