@@ -1,16 +1,36 @@
 import { Award, ClipboardList, Cpu, IndianRupee, Heart } from "lucide-react";
 
 const features = [
-  { icon: Award, title: "Certified Therapists", description: "Licensed and experienced professionals" },
-  { icon: ClipboardList, title: "Personalized Plans", description: "Tailored to your unique needs" },
-  { icon: Cpu, title: "Modern Equipment", description: "State-of-the-art therapy tools" },
-  { icon: IndianRupee, title: "Affordable Pricing", description: "Quality care within your budget" },
-  { icon: Heart, title: "Patient-Centered Care", description: "Your comfort is our priority" },
+  {
+    icon: Award,
+    title: "Certified Therapists",
+    description: "Our team consists of licensed and experienced physical therapists dedicated to providing the highest quality of care.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Personalized Plans",
+    description: "We create customized treatment plans tailored to your specific condition, goals, and lifestyle for a more effective recovery.",
+  },
+  {
+    icon: Cpu,
+    title: "Modern Equipment",
+    description: "Our clinic is equipped with state-of-the-art therapeutic tools and technology to ensure you receive the most advanced treatments.",
+  },
+  {
+    icon: IndianRupee,
+    title: "Affordable Pricing",
+    description: "We are committed to making quality healthcare accessible by offering competitive and transparent pricing options.",
+  },
+  {
+    icon: Heart,
+    title: "Patient-Centered Care",
+    description: "Your comfort, needs, and goals are at the forefront of everything we do, ensuring a positive and supportive experience.",
+  },
 ];
 
 const WhyChooseUs = () => {
   return (
-    <section className="bg-muted/50 py-20 sm:py-24">
+    <section className="bg-green-50 py-20 sm:py-24 border-t border-b border-green-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-3xl font-bold text-foreground sm:text-4xl">Why Choose Us</h2>
         <div className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
