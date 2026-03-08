@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import BookingSection from "@/components/BookingSection";
 
 export const metadata: Metadata = {
-  title: "Book an Appointment - PhysioWithUs",
-  description: "Book your physiotherapy appointment with us today and start your journey to recovery.",
+  title: "Book Your Home Physiotherapy Appointment",
+  description:
+    "Conveniently book your home physiotherapy session with PhysioWithUs. Our certified therapists are ready to help you on your journey to recovery. Schedule your appointment today.",
+  alternates: {
+    canonical: "/booking",
+  },
 };
 
 export default function BookingPage() {

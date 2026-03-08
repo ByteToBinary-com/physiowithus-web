@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import AboutSection from "@/components/AboutSection";
 
 export const metadata: Metadata = {
-  title: "About Us - PhysioWithUs",
-  description: "Learn more about our team of dedicated physiotherapists and our mission to provide excellent care.",
+  title: "About Our Expert Physiotherapy Team",
+  description:
+    "Meet the certified and experienced physiotherapists at PhysioWithUs. Learn about our mission to provide personalized, high-quality home physiotherapy and rehabilitation services.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {
