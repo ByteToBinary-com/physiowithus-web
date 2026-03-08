@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AboutSection from "@/components/AboutSection";
 
 export const metadata: Metadata = {
-  title: "About Our Expert Physiotherapy Team | PhysioWithUs",
+  title: "About Our Expert Physiotherapy Team",
   description:
     "Meet the certified and experienced physiotherapists at PhysioWithUs. Learn about our mission to provide personalized, high-quality home physiotherapy and rehabilitation services.",
   alternates: {

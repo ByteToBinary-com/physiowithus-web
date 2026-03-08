@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: "PhysioWithUs",
     images: [
       {
-        url: "/og-image.png", // Make sure to create this image
+        url: "/physiowithus.png",
         width: 1200,
         height: 630,
         alt: "PhysioWithUs Home Physiotherapy Services",
@@ -53,8 +53,8 @@ export const metadata: Metadata = {
     title: "PhysioWithUs | Expert Home Physiotherapy & Rehabilitation",
     description:
       "Get professional physiotherapy care in the comfort of your home. Book your appointment today!",
-    images: ["/twitter-image.png"], // Make sure to create this image
-    creator: "@physiowithus", // Replace with your Twitter handle
+    images: ["/physiowithus.png"],
+    creator: "@physiowithus",
   },
   icons: {
     icon: "/physiowithus_icon.ico",
